@@ -10,20 +10,19 @@ class App extends React.Component {
     this.state = {
       allVideos: exampleVideoData,
       currentVideo: exampleVideoData[0],
-      query: 'react'
+      query: ''
     };
-    this.onListItemClick = this.onListItemClick.bind(this);
   }
 
   componentDidMount() {
-    this.getSearchResults();
+    this.getSearchResults('cute kittens');
   }
 
-  getSearchResults(query = "react"){
+  getSearchResults(query) {
     var options = {
       key: YOUTUBE_API_KEY,
       q: query,
-      maxResults: 5,
+      maxResults: 5
     };
     this.props.searchYouTube(options, (data) => {
       this.setState({
@@ -43,7 +42,7 @@ class App extends React.Component {
     this.setState({
       // query
       [e.target.name]: e.target.value
-    })
+    });
     this.getSearchResults(this.state.query);
   }
 
@@ -51,7 +50,7 @@ class App extends React.Component {
     this.getSearchResults(this.state.query);
   }
 
-  render(){
+  render() {
     return(
       <div>
         <nav className="navbar">
@@ -73,7 +72,7 @@ class App extends React.Component {
             <div>
               <h5>
                 <em>
-                  <VideoList onListItemClick={this.onListItemClick} videos={this.state.allVideos} />
+                  <VideoList onListItemClick={this.onListItemClick.bind(this)} videos={this.state.allVideos} />
                 </em>
               </h5>
             </div>
@@ -84,7 +83,6 @@ class App extends React.Component {
   }
 }
 
-// <div><h5><em>{props.videoList}</em> view goes here</h5></div>
 // In the ES6 spec, files are "modules" and do not share a top-level scope
 // `var` declarations will only exist globally where explicitly defined
 export default App;

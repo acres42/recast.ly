@@ -6,7 +6,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "compile:babel": "babel . --out-dir compiled --presets=react --ignore=node_modules,compiled --source-maps inline --watch",
+    "compile:babel": "babel . --out-dir compiled --presets=react --ignore=node_modules,compiled --source-maps inline",
+    "watch:babel": "babel . --out-dir compiled --presets=react --ignore=node_modules,compiled --source-maps inline --watch",
     "start": "live-server && npm run compile:babel",
     "test": "live-server --open=./SpecRunner.html --port=8081",
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash"

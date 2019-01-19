@@ -1,4 +1,4 @@
-
+import exampleVideoData from '../data/exampleVideoData.js';
 
 var searchYouTube = (options, callback = ()=>{}) => {
   $.ajax({
@@ -13,16 +13,37 @@ var searchYouTube = (options, callback = ()=>{}) => {
       type: 'video',
       videoEmbeddable: true
     },
-    // dataType: 'jsonp',
-    // contentType: 'application/jsonp',
+    contentType: 'application/json',
     success: (data) => {
       callback(data.items);
     },
     error: function(error) {
+      callback(exampleVideoData);
       console.error('youtube: Failed to fetch videos', error);
     }
-  })
+  });
 };
+
+// var searchYouTube = ({key, q, maxResults = 5}, callback) => {
+//   $.get('https://www.googleapis.com/youtube/v3/search', {
+//     part: 'snippet',
+//     key: key,
+//     q: q,
+//     maxResults: maxResults,
+//     type: 'video',
+//     videoEmbeddable: 'true'
+//   })
+//     .done(({items}) => {
+//       if (callback) {
+//         callback(items);
+//       }
+//     })
+//     .fail(({responseJSON}) => {
+//       responseJSON.error.errors.forEach((err) =>
+//         console.error(err)
+//       );
+//     });
+// };
 
 export default searchYouTube;
 

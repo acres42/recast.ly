@@ -81,7 +81,7 @@ describe('searchYouTube', function() {
     // We want this test to make a real AJAX request
     xhr.restore();
     searchYouTube(options, function(data) {
-      expect(hasSameShape(data.items, exampleVideoData)).to.be.true;
+      expect(hasSameShape(data, exampleVideoData)).to.be.true;
       done();
     });
   });
